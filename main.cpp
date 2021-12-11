@@ -4,14 +4,29 @@
 using namespace std;
 
 int main() {
-    int depth;
+    int depth = 0;
+    int numGreaterThan = 0;
     vector<int> depths;
-    fstream numbersFile;
-    numbersFile.open("input.txt");
+    ifstream numbersFile;
+
+    numbersFile.open("../input.txt");
     if (numbersFile.is_open()) {
         while (numbersFile >> depth) {
             depths.push_back(depth);
         }
+
+        cout << "Read in ";
+        cout << depths.size();
+        cout << " numbers" << endl;
+
+        numbersFile.close();
     }
-    numbersFile.close();
+
+    for (int i = 2; i < depths.size(); ++i) {
+        if (depths[i] > depths[i-1]) {
+            ++numGreaterThan;
+        }
+    }
+
+    cout << "There are " + to_string(numGreaterThan) + " readings greater than the previous";
 }
