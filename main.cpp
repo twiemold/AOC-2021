@@ -22,7 +22,7 @@ int main() {
         numbersFile.close();
     }
 
-    for (int i = 2; i < depths.size(); ++i) {
+    for (int i = 1; i < depths.size(); ++i) {
         if (depths[i] > depths[i-1]) {
             ++numGreaterThan;
         }
