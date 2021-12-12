@@ -19,6 +19,7 @@ int main() {
             inputs.push_back(input);
         }
     }
+    inputFile.close();
 
     for (int i = 1; i < inputs.size(); i+=2) {
         values.push_back(stoi(inputs[i]));
