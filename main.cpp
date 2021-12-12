@@ -18,6 +18,7 @@ int main() {
             inputs.push_back(input);
         }
     }
+    inputFile.close();
 
     vector<string> oxygenVec;
     vector<string> carbonVec;
