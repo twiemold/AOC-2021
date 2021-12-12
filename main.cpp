@@ -6,6 +6,7 @@ using namespace std;
 int main() {
     int depth = 0;
     int numGreaterThan = 0;
+    double numberOfDivisions;
     vector<int> depths;
     ifstream numbersFile;
 
@@ -22,8 +23,10 @@ int main() {
         numbersFile.close();
     }
 
-    for (int i = 1; i < depths.size(); ++i) {
-        if (depths[i] > depths[i-1]) {
+    for (int i = 2; i < depths.size(); ++i) {
+        int previousSum = depths[i-2] + depths[i-1] + depths[i];
+        int currentSum = depths[i-1] + depths[i] + depths[i+1];
+        if (currentSum > previousSum) {
             ++numGreaterThan;
         }
     }
