@@ -8,6 +8,7 @@ int main() {
     fstream inputFile;
     int forward = 0;
     int depth = 0;
+    int aim = 0;
     vector<string> inputs;
     vector<string> commands;
     vector<int> values;
@@ -29,11 +30,12 @@ int main() {
 
     for (int i = 0; i < commands.size(); ++i) {
         if (commands[i] == "up") {
-            depth -= values[i];
+            aim -= values[i];
         } else if (commands[i] == "down") {
-            depth += values[i];
+            aim += values[i];
         } else {
             forward += values[i];
+            depth += aim * values[i];
         }
     }
 
