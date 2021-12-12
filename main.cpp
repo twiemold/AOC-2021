@@ -9,6 +9,7 @@ int main() {
     int forward = 0;
     int depth = 0;
     vector<string> inputs;
+    vector<string> commands;
     vector<int> values;
     string input;
     inputFile.open("../input.txt");
@@ -22,15 +23,23 @@ int main() {
         values.push_back(stoi(inputs[i]));
     }
 
-    for (int i = 0; i < inputs.size(); i += 2) {
-        if (inputs[i] == "up") {
+    for (int i = 0; i < inputs.size(); i+=2) {
+        commands.push_back(inputs[i]);
+    }
+
+    for (int i = 0; i < commands.size(); ++i) {
+        if (commands[i] == "up") {
             depth -= values[i];
-        } else if (inputs[i] == "down") {
+        } else if (commands[i] == "down") {
             depth += values[i];
         } else {
             forward += values[i];
         }
     }
+
+    int final_val = forward * depth;
+
+    cout << "The final value is " + to_string(final_val) << endl;
 
     return 0;
 }
