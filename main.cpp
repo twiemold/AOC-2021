@@ -13,6 +13,7 @@ int main() {
     int finalScore = 0;
     int finalDrawNumber = -1;
     int winningBoard = -1;
+    vector<int> winningBoards;
     inputFile.open("../input.txt");
     if (inputFile.is_open()) {
         while (inputFile >> input) {
@@ -30,7 +31,7 @@ int main() {
     }
 
     const int numberOfBoards = (inputs.size() - 1) / 25;
-    int boards[numberOfBoards][5][5];
+    int boards[100][5][5];
 
     int l = 1;
     for (int i = 0; i < numberOfBoards; ++i) {
@@ -70,14 +71,21 @@ int main() {
                     // Bingo !
                     winningBoard = q;
                     finalDrawNumber = drawNumber;
-                    break;
+                    if (std::find(winningBoards.begin(), winningBoards.end(), q) != winningBoards.end()) {
+                        continue;
+                    } else {
+                        winningBoards.push_back(q);
+                    }
+                    if (winningBoards.size() == numberOfBoards) {
+                        break;
+                    }
                 }
             }
-            if (winningBoard != -1) {
+            if (winningBoards.size() == numberOfBoards) {
                 break;
             }
         }
-        if (winningBoard != -1) {
+        if (winningBoards.size() == numberOfBoards) {
             break;
         }
     }
