@@ -26,8 +26,28 @@ int main() {
         drawNumbers.push_back(val);
     }
 
+    const int numberOfBoards = (inputs.size() - 1) / 25;
+    // Cheating
+    int boards[100][5][5];
+    int markedBoards[100][5][5];
+
+    int l = 1;
+    for (int i = 0; i < numberOfBoards; ++i) {
+        for (int j = 0; j < 5; ++j) {
+            for (int k = 0; k < 5; ++k) {
+                int val = stoi(inputs[l]);
+                boards[i][j][k] = val;
+                ++l;
+            }
+        }
+    }
+
+
+
     for (int& i : drawNumbers) {
         cout << i << endl;
     }
+
+    cout << inputs.size();
     return 0;
 }
