@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iostream>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -27,8 +26,22 @@ int main() {
         lanternfish.push_back(val);
     }
 
-    for (int &i : lanternfish) {
-        cout << i << endl;
+    for (int i = 0; i < 80; ++i) {
+        int newLanternfish = 0;
+        for (int & fish : lanternfish) {
+            if (fish == 0) {
+                ++newLanternfish;
+                fish = 6;
+            } else {
+                --fish;
+            }
+        }
+        for (int j = 0; j < newLanternfish; ++j) {
+            lanternfish.push_back(8);
+        }
     }
+
+    cout << "There are " + to_string(lanternfish.size()) + " lanternfish after 80 days";
+
     return 0;
 }
