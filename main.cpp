@@ -10,6 +10,7 @@ int main() {
     fstream inputFile;
     vector<string> inputs;
     vector<vector<int>> coordinates;
+    int numberOfOverlaps;
     string input;
     inputFile.open("../input.txt");
     if (inputFile.is_open()) {
@@ -41,6 +42,42 @@ int main() {
             coordinates.push_back(v1);
         }
     }
+
+    // Create map
+    for (int i = 0; i < coordinates.size(); i += 2) {
+        int x1 = coordinates[i][0];
+        int x2 = coordinates[i+1][0];
+        int y1 = coordinates[i][1];
+        int y2 = coordinates[i+1][1];
+        if (y1 == y2) {
+            int xRange = abs(x1 - x2);
+            int startX = -1;
+            if (x1 > x2) {
+                startX = x2;
+            } else {
+                startX = x1;
+            }
+            for (int k = 0; k < xRange; ++k) {
+                int xVal = startX + k;
+                board[xVal][y1] += 1;
+            }
+        } else if (x1 == x2) {
+            int yRange = abs(y1 - y2);
+            int startY = -1;
+            if (y1 > y2) {
+                startY = y2;
+            } else {
+                startY = y1;
+            }
+            for (int k = 0; k < yRange; ++k) {
+                int yVal = startY + k;
+                board[x1][yVal] += 1;
+            }
+        } else {
+            continue;
+        }
+    }
+
 
 
     return 0;
