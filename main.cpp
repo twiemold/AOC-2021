@@ -10,7 +10,7 @@ int main() {
     fstream inputFile;
     vector<string> inputs;
     vector<vector<int>> coordinates;
-    int numberOfOverlaps;
+    int numberOfOverlaps = 0;
     string input;
     inputFile.open("../input.txt");
     if (inputFile.is_open()) {
@@ -57,7 +57,7 @@ int main() {
             } else {
                 startX = x1;
             }
-            for (int k = 0; k < xRange; ++k) {
+            for (int k = 0; k < xRange + 1; ++k) {
                 int xVal = startX + k;
                 board[xVal][y1] += 1;
             }
@@ -69,7 +69,7 @@ int main() {
             } else {
                 startY = y1;
             }
-            for (int k = 0; k < yRange; ++k) {
+            for (int k = 0; k < yRange + 1; ++k) {
                 int yVal = startY + k;
                 board[x1][yVal] += 1;
             }
@@ -77,6 +77,16 @@ int main() {
             continue;
         }
     }
+
+    for (int i = 0; i < 1000; ++i) {
+        for (int j = 0; j < 1000; ++j) {
+            if (board[i][j] >= 2) {
+                ++numberOfOverlaps;
+            }
+        }
+    }
+
+    cout << "There are " + to_string(numberOfOverlaps) + " places with two overlaps";
 
 
 
