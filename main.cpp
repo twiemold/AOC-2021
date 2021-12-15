@@ -49,33 +49,21 @@ int main() {
         int x2 = coordinates[i+1][0];
         int y1 = coordinates[i][1];
         int y2 = coordinates[i+1][1];
-        if (y1 == y2) {
-            int xRange = abs(x1 - x2);
-            int startX = -1;
+        while (x1 != x2 || y1 != y2) {
+            board[x1][y1] += 1;
             if (x1 > x2) {
-                startX = x2;
-            } else {
-                startX = x1;
+                --x1;
+            } else if (x2 > x1) {
+                ++x1;
             }
-            for (int k = 0; k < xRange + 1; ++k) {
-                int xVal = startX + k;
-                board[xVal][y1] += 1;
-            }
-        } else if (x1 == x2) {
-            int yRange = abs(y1 - y2);
-            int startY = -1;
             if (y1 > y2) {
-                startY = y2;
-            } else {
-                startY = y1;
+                --y1;
+            } else if (y2 > y1) {
+                ++y1;
             }
-            for (int k = 0; k < yRange + 1; ++k) {
-                int yVal = startY + k;
-                board[x1][yVal] += 1;
-            }
-        } else {
-            continue;
         }
+        // Fix off by one error, sloppy
+        board[x1][y1] += 1;
     }
 
     for (int i = 0; i < 1000; ++i) {
@@ -86,7 +74,7 @@ int main() {
         }
     }
 
-    cout << "There are " + to_string(numberOfOverlaps) + " places with two overlaps";
+    cout << "There are " + to_string(numberOfOverlaps) + " places with two or more overlaps";
 
 
 
