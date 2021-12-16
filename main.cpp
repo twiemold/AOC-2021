@@ -10,7 +10,7 @@ int main() {
     vector<string> inputs;
     string input;
     vector<int> crabs;
-    vector<vector<int>> fuelCosts;
+    vector<vector<unsigned int>> fuelCosts;
     inputFile.open("../input.txt");
     if (inputFile.is_open()) {
         while (inputFile >> input) {
@@ -30,15 +30,19 @@ int main() {
     int max = *std::max_element(crabs.begin(), crabs.end());
 
     for (int j = 0; j < max; ++j) {
-        vector<int> tempFuelCosts;
-        vector<int> finalValues;
+        vector<unsigned int> tempFuelCosts;
+        vector<unsigned int> finalValues;
         int locationVal = j;
-        int fuelSum = 0;
+        unsigned int fuelSum = 0;
         for (int crab : crabs) {
-            int fuelCost = abs(crab - j);
+            unsigned int fuelCost = 0;
+            int distance = abs(crab - j);
+            for(int i = 1; i <= distance; ++i) {
+                fuelCost += i;
+            }
             tempFuelCosts.push_back(fuelCost);
         }
-        for (int tempFuelCost : tempFuelCosts) {
+        for (unsigned int tempFuelCost : tempFuelCosts) {
             fuelSum += tempFuelCost;
         }
         finalValues.push_back(fuelSum);
@@ -46,8 +50,8 @@ int main() {
         fuelCosts.push_back(finalValues);
     }
 
-    int minFuel = 1000000;
-    int minLocation = -1;
+    unsigned int minFuel = fuelCosts[0][0];
+    unsigned int minLocation = -1;
     for (auto & fuelCost : fuelCosts) {
         if (fuelCost[0] < minFuel) {
             minFuel = fuelCost[0];
