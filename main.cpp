@@ -21,8 +21,9 @@ int main() {
     }
     inputFile.close();
 
-    for (string &i : signalPatterns) {
-        cout << i << endl;
+    for (auto & outputVal : outputValues) {
+        string checkVal;
+        outputVal >> checkVal;
     }
     return 0;
 }
